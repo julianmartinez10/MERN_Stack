@@ -48,7 +48,7 @@ class Effect extends Card{
             }else if(this.stat.toLowerCase() == "power"){
                 target.power += this.mag;
             }else{
-                console.log("What to do?")
+                console.log("Whatitdo?")
             }
         }else{
             console.log("Nah.....Bruh");
