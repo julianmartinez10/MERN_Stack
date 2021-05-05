@@ -1,10 +1,15 @@
-class App extends Component{
+import React, { Component } from "react";
+
+class NewComponent extends Component{
     render(){
         return (
             <>
-                <h1>Hello World</h1>
-                <h3 className="my-class">This is JSX</h3>
+                <div>
+                    {this.props.someText}
+                </div>
             </>
         );
     }
 }
+
+export default NewComponent;
