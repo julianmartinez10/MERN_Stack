@@ -31,13 +31,17 @@ class PersonCard extends Component{
             alert(`Happy Birthday ${first} ${last}`)
         }
         const {ageCount} = this.state
-        return <div className="cardName">
-            <h1>{first} {last}</h1>
-            <p>Age: {ageCount}</p>
-            <p>Hair Color: {hairColor}</p>
-            <p>{children}</p>
-            <button onClick={ doSomething }>Birthday Button for {first} {last}</button>
+        return (
+        <div className="col-4 offset-4 card mt-4">
+            <div className="card-body">
+                <h1 className="card-title text-center">{first} {last}</h1>
+                <p className="card-text">Age: {ageCount}</p>
+                <p>Hair Color: {hairColor}</p>
+                <p>{children}</p>
+                <button className="btn btn-primary" onClick={ doSomething }>Birthday Button for {first} {last}</button>
+            </div>
         </div>
+        )
     }
 }
 
@@ -45,3 +49,4 @@ export default PersonCard;
 
 //  onClick is the "Event Listener"
 //  anything set in State cannot be modified unless using setState
+
