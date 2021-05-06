@@ -1,22 +1,6 @@
-// import React, { Component } from 'react';
-
-
-// class SomeClassComponent extends Component {
-//     render() {
-//         return <div>This is our first class component.</div>;
-//     }
-// }
-
-// export default SomeClassComponent;
 import React, {Component} from 'react';
 
 class PersonCard extends Component{
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         position: "On"
-    //     };
-    // }
     constructor(props){
         super(props);
         this.state = {
@@ -32,7 +16,7 @@ class PersonCard extends Component{
         }
         const {ageCount} = this.state
         return (
-        <div className="col-4 offset-4 card mt-4">
+        <div className="personCard col-4 offset-4 card mt-4">
             <div className="card-body">
                 <h1 className="card-title text-center">{first} {last}</h1>
                 <p className="card-text">Age: {ageCount}</p>
