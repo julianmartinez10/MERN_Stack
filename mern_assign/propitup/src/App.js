@@ -6,10 +6,15 @@ import PersonCard from './components/PersonCard';
 function App() {
   return (
     <div className="App">
-      <PersonCard firstName ={"Julian"} lastName={"Martinez"} age={41} hairColor={"Black"}></PersonCard>
-      <PersonCard firstName ={"Jessica"} lastName={"Martinez"} age={40} hairColor={"Autumn Red"}></PersonCard>
-      <PersonCard firstName ={"Bubba"} lastName={"Martinez"} age={20} hairColor={"Black"}></PersonCard>
-      <PersonCard firstName ={"BamBam"} lastName={"Martinez"} age={11} hairColor={"Red"}></PersonCard>
+      <PersonCard firstName ={"Julian"} lastName={"Martinez"} age={41} hairColor={"Black"}>
+        <h3>This is a child of props!</h3>
+      </PersonCard>
+      <PersonCard firstName ={"Jessica"} lastName={"Martinez"} age={40} hairColor={"Autumn Red"}>
+      </PersonCard>
+      <PersonCard firstName ={"Bubba"} lastName={"Martinez"} age={20} hairColor={"Black"}>
+      </PersonCard>
+      <PersonCard firstName ={"BamBam"} lastName={"Martinez"} age={11} hairColor={"Red"}>
+        </PersonCard>
     </div>
   );
 }
