@@ -3,16 +3,32 @@ import React, {useState} from 'react';
 
 const HookForm = props => {
 
-    const [firstName, setfirstName] = useState("");
-    const [lastName, setlastName] = useState("");
-    const [email, setemail] = useState("");
-    const [password, setpassword] = useState("");
+    // const [firstName, setfirstName] = useState("");
+    // const [lastName, setlastName] = useState("");
+    // const [email, setemail] = useState("");
+    // const [password, setpassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
 
+    const [formInfo, setFormInfo] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+
+    })
+
+    const changeHandler = (e)=>{
+        console.log("changing input now")
+        setFormInfo({
+            ...formInfo,
+            [e.target.name]: e.target.value
+        })
+    }
+
     const submitPerson = (e)=>{
         e.preventDefault();
-        console.log(`What up world!!! Hi ${firstName}`)
+        console.log(`What up world!!! Hi ${formInfo.firstName}`)
         setIsSubmitted(true);
     }
 
@@ -25,36 +41,36 @@ const HookForm = props => {
                 <div className="form-group row">
                     <label htmlFor="" className="col-sm-2 col-form-label text-left">First Name</label>
                     <div className="col-sm-6">
-                        <input onChange={e => setfirstName(e.target.value)} type="text" name="" id=""className="form-control"/>
-                        <p className="text-danger">{firstName.length<2 && firstName.length>0? `First Name needs still needs at least ${2-firstName.length}  characters long!`: ""}</p>
+                        <input onChange={changeHandler} type="text" name="firstName" id=""className="form-control"/>
+                        <p className="text-danger">{formInfo.length<2 && formInfo.length>0? `First Name needs still needs at least ${2-formInfo.length}  characters long!`: ""}</p>
                     </div>
                 </div>
                 <div className="form-group row">
                     <label htmlFor="" className="col-sm-2 col-form-label text-left">Last Name</label>
                     <div className="col-sm-6">
-                        <input onChange={e => setlastName(e.target.value)} type="text" name="" id=""className="form-control"/>
-                        <p className="text-danger">{lastName.length<2 && lastName.length>0? `Last Name still needs at least ${2-lastName.length}  characters long!`: ""}</p>
+                        <input onChange={changeHandler} type="text" name="lastName" id=""className="form-control"/>
+                        <p className="text-danger">{formInfo.length<2 && formInfo.length>0? `Last Name still needs at least ${2-formInfo.length}  characters long!`: ""}</p>
                     </div>
                 </div>
                 <div className="form-group row">
                     <label htmlFor="" className="col-sm-2 col-form-label text-left">Email</label>
                     <div className="col-sm-6">
-                        <input onChange={e=>setemail(e.target.value)} type="email" name="" id=""className="form-control"/>
-                        <p className="text-danger">{email.length<5 && email.length>0? `Email still needs at least ${5-email.length}  characters long!`: ""}</p>
+                        <input onChange={changeHandler} type="email" name="email" id=""className="form-control"/>
+                        <p className="text-danger">{formInfo.length<5 && formInfo.length>0? `Email still needs at least ${5-formInfo.length}  characters long!`: ""}</p>
                     </div>
                 </div>
                 <div className="form-group row" >
                     <label htmlFor="" className="col-sm-2 col-form-label text-left">Password</label>
                     <div className="col-sm-6">
-                        <input onChange={e=>setpassword(e.target.value)} type="password" name="" id=""className="form-control"/>
-                        <p className="text-danger">{password.length<8 && password.length>0? `Password still needs at least ${8-password.length}  characters long!`: ""}</p>
+                        <input onChange={changeHandler} type="password" name="password" id=""className="form-control"/>
+                        <p className="text-danger">{formInfo.length<8 && formInfo.length>0? `Password still needs at least ${8-formInfo.length}  characters long!`: ""}</p>
                     </div>
                 </div>
                 <div className="form-group row">
                     <label htmlFor="" className="col-sm-2 col-form-label text-left">Confirm Password</label>
                     <div className="col-sm-6">
                         <input onChange={e=>setConfirmPassword(e.target.value)} type="password" name="" id=""className="form-control"/>
-                        <p className="text-danger">{confirmPassword !== password? `Confirmed password must match password!` : ""}</p>
+                        <p className="text-danger">{confirmPassword !== formInfo.password? `Confirmed password must match password!` : ""}</p>
                     </div>
                 </div>
                 <div className="form-group row">
@@ -64,10 +80,10 @@ const HookForm = props => {
                 </div>
             </form>
                 <ul className="col-6 offset-md-4 list-group">
-                    <p className="list-group-item-dark text-left">First Name: {firstName}</p>
-                    <p className="list-group-item-light text-left">Last Name: {lastName}</p>
-                    <p className="list-group-item-dark text-left">Email: {email}</p>
-                    <p className="list-group-item-light text-left">Password: {password}</p>
+                    <p className="list-group-item-dark text-left">First Name: {formInfo.firstName}</p>
+                    <p className="list-group-item-light text-left">Last Name: {formInfo.lastName}</p>
+                    <p className="list-group-item-dark text-left">Email: {formInfo.email}</p>
+                    <p className="list-group-item-light text-left">Password: {formInfo.password}</p>
                     <p className="list-group-item-light text-left">Confirm Password: {confirmPassword}</p>
                 </ul>
         </div>
