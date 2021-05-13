@@ -16,9 +16,9 @@ const Form = () => {
     //  each event listener should have a "handler"
     //  changeHandler
     const changeHandler = (e)=>{
-        console.log("You be typing in the form!!!")
-        console.log(e.target.name)
-        console.log(e.target.value)
+        // console.log("You be typing in the form!!!")
+        // console.log(e.target.name)
+        // console.log(e.target.value)
 
         //  setting form info
         setFormInfo({
@@ -42,6 +42,20 @@ const Form = () => {
         })
     }
 
+    const deleteBox = (e, idxnumber)=>{
+        console.log("deleting this box at index: ", idxnumber);
+        //  splice method
+        // let boxes = [...allBoxes];
+        // boxes.splice(idxnumber, 1);
+        // setAllBoxes(boxes);
+
+        //  filter method
+        let result = allBoxes.filter((box, idx)=>{
+            return idx !== idxnumber;
+        })
+        setAllBoxes(result)
+    }
+
 
     return (
         <div className="container">
@@ -55,10 +69,15 @@ const Form = () => {
                 </form>
                 <div >
                     {
-                    allBoxes.map(box=>{
-                        return <div className={styles.boxcontainer} style = {{backgroundColor: box.color}}>
-                            <h1 className={styles.fonty}>{box.color}</h1>
-                        </div>
+                    allBoxes.map((box, idx)=>{
+                        return (
+                            <>
+                            <div key={idx} className={styles.boxcontainer} style = {{backgroundColor: box.color}}>
+                            <h1 className={styles.fonty}>{box.color}
+                            <button className="btn btn-danger" onClick={e=> deleteBox(e, idx)}>DESTROY</button></h1>
+                            </div>
+                            </>
+                        )
                     })
                     }
                 </div>
