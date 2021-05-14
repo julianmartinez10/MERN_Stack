@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 
 const PokemonForm = () => {
 
@@ -23,16 +24,25 @@ const PokemonForm = () => {
     // console.log("Outside the fetch", res)
 
     const getPlayers = ()=>{
-        fetch("https://pokeapi.co/api/v2/pokemon?limit=887&?")
-            .then(res => {
-                return res.json()
-            })
-            .then(res => {
-                console.log("*********")
-                console.log(res.results)
-                 setAllPlayers(res.results) //   will send request on an infinite loop until computer crashes or you run out of requests from the API, unless inside useEffect callbackFunction
-            })
-            .catch(err => console.log("ERRRRRRROOOOOORRRRR", err))
+        // fetch("https://pokeapi.co/api/v2/pokemon?limit=887&?")
+        //     .then(res => {
+        //         return res.json()
+        //     })
+        //     .then(res => {
+        //         console.log("*********")
+        //         console.log(res.results)
+        //          setAllPlayers(res.results) //   will send request on an infinite loop until computer crashes or you run out of requests from the API, unless inside useEffect callbackFunction
+        //     })
+        //     .catch(err => console.log("ERRRRRRROOOOOORRRRR", err))
+
+        //  axios is clean version of fetch
+        //  be sure when setting players that you add .data. otherwise expect an error
+        axios.get("https://pokeapi.co/api/v2/pokemon?limit=887&?")
+        .then(res => {
+            console.log("*********")
+            console.log(res.results)
+            setAllPlayers(res.data.results)})
+        .catch(err => {console.log(err)})
     }
 
 
