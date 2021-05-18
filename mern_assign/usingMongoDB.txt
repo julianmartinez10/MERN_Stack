@@ -1,0 +1,80 @@
+Create a database called 'my_first_db'.
+    use my_first_db
+
+Create students collection.
+    db.createCollection("students")
+
+Each document you insert into this collection should have the following format: ({name: STRING, home_state: STRING, lucky_number: NUMBER, birthday: {month: NUMBER, day: NUMBER, year: NUMBER}})
+
+Create 5 students with the appropriate info.
+
+    db.students.insert({name: "Julian", home_state: "Texas", lucky_number: 10, birthday:{month: 8, day: 30, year: 1980}})
+    db.students.insert({name: "Bob", home_state: "Jamaica", lucky_number: 420, birthday:{month: 4, day: 20, year: 1970}})
+    db.students.insert({name: "Willie", home_state: "Seattle", lucky_number: 45, birthday:{month: 9, day: 15, year: 1969}})
+    db.students.insert({name: "Vince", home_state: "California", lucky_number: 35, birthday:{month: 3, day: 3, year: 1955}})
+    db.students.insert({name: "Bruce", home_state: "California", lucky_number: 16, birthday:{month: 3, day: 20, year: 2005}})
+    db.students.insert({name: "Ali", home_state: "Seattle", lucky_number: 94, birthday:{month: 1, day: 16, year: 1942}})
+    db.students.insert({name: "Chuck", home_state: "Texas", lucky_number: 2, birthday:{month: 1, day: 16, year: 1952}})
+
+
+Get all students.
+    db.students.find().pretty()
+
+
+Retrieve all students who are from California (San Jose Dojo) or Washington (Seattle Dojo).
+    db.students.find({home_state: {$in: ["California", "Seattle"]}}).pretty()
+
+Get all students whose lucky number is greater than 3
+    db.students.find({lucky_number: {$gte: 3}})
+
+Get all students whose lucky number is less than or equal to 10
+    db.students.find({lucky_number:{$lte:10}})
+
+Get all students whose lucky number is between 1 and 9 (inclusive)
+    db.students.find({lucky_number:{$gt: 1, $lt: 9}})
+
+Add a field to each student collection called 'interests' that is an ARRAY. It should contain the following entries: 'coding', 'brunch', 'MongoDB'. Do this in ONE operation.
+    db.students.update({}, {$set:{interests: 'coding', 'brunch', 'MongoDB'}})           // uncaught exception: SyntaxError: missing : after property id : @(shell):1:68
+    db.students.update({}, {$addFields:{interests: 'coding', 'brunch', 'MongoDB'}})     // uncaught exception: SyntaxError: missing : after property id : @(shell):1:68
+    db.students.aggregate({}, {$addFields:{interests: 'coding', 'brunch', 'MongoDB'}})  // uncaught exception: SyntaxError: missing : after property id : @(shell):1:68
+
+    db.students.updateMany({}, {$set:{interests: ['coding', 'brunch', 'MongoDB']}})     // uncaught exception: SyntaxError: missing : after property id : @(shell):1:68
+
+
+Add some unique interests for each particular student into each of their interest arrays.
+    db.students.update({name: "Julian"}, {$push: {interests: "Coaching"}})
+    db.students.update({name: "Bob"}, {$push: {interests: "Smoking"}})
+    db.students.update({name: "Willie"}, {$push: {interests: "Singing"}})
+    db.students.update({name: "Vince"}, {$push: {interests: "Football"}})
+    db.students.update({name: "Bruce"}, {$push: {interests: "Philosphy"}})
+    db.students.update({name: "Ali"}, {$push: {interests: "Training"}})
+    db.students.update({name: "Chuck"}, {$push: {interests: "Acting"}})
+
+
+Add the interest 'taxes' into someone's interest array.
+    db.students.update({name: "Chuck"}, {$push: {interests: "taxes"}})
+
+Remove the 'taxes' interest you just added.
+    db.students.update({name: "Chuck"}, {$pop: {interests: 1}})
+
+Remove all students who are from California.
+    db.students.remove({home_state: "California"})
+
+Remove a student by name.
+    db.students.remove({name: "Chuck"})
+
+Remove a student whose lucky number is greater than 5 (JUST ONE)
+    db.students.remove({lucky_number: {$gte:5}})
+
+Add a field to each student collection called 'number_of_belts' and set it to 0.
+    db.students.updateMany({}, {$set:{number_of_belts: 0}})
+
+Increment this field by 1 for all students in Washington (Seattle Dojo).
+    db.students.updateMany({home_state: "Seattle"}, {$set:{number_of_belts: 1}})
+
+Rename the 'number_of_belts' field to 'belts_earned'
+    db.students.updateMany({}, {$set:{}})
+
+Remove the 'lucky_number' field.
+
+Add a 'updated_on' field, and set the value as the current date.
